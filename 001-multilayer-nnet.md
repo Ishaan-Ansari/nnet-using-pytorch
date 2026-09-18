@@ -4,29 +4,32 @@ import torch
 
 class NeuralNetwork(torch.nn.Module):
     def __init__(self, num_inputs, num_outputs):
-        # called inside the child class to inherit the modules of parent class (Here... torch.nn.Module)
         super().__init__()
         
-        # Initialize the Nnet Layers using Sequential
         self.layers = torch.nn.Sequential(
             torch.nn.Linear(num_inputs, 30),
             torch.nn.ReLU(),
             
-            torch.nn.Linear(30, 30),
+            torch.nn.Linear(30, 20),
             torch.nn.ReLU(),
 
             torch.nn.Linear(20, num_outputs),
-            torch.nn.ReLU(),
         )
         
     def forward(self, x):
-        """
-        This is our forward pass
-        """
         logits = self.layers(x)
         return logits
     
+    
+# incase if we want to keep the weights intialization reproducable we can do this
+torch.manual_seed(123)
 model = NeuralNetwork(50, 3)
+
+# now we can also check the results of forward pass
+# note that our network expects 50-dimensional feature vectors
+x = torch.rand((1, 50))
+out = model(x)
+print(out)
 
 # count number of learnable params
 num_params = sum(
