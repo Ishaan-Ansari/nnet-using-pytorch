@@ -48,4 +48,34 @@ class ToyDataset(Dataset):
 
 train_ds = ToyDataset(X_train, y_train)
 test_ds = ToyDataset(X_test, y_test)
+
+torch.manual_seed(123)
+
+train_loader = DataLoader(
+    dataset=train_ds,
+    batch_size=2,
+    shuffle=True,
+    num_workers=0
+)
+
+test_loader = DataLoader(
+    dataset=test_ds,
+    batch_size=2,
+    shuffle=False,
+    num_workers=0
+)
+```
+
+```python
+for idx, (x, y) in enumerate(train_loader):
+    print(f"Batch {idx+1}:", x,y)
+```
+
+### The result of will look something like this
+```json
+Batch 1: tensor([[ 2.3000, -1.1000],
+        [-0.9000,  2.9000]]) tensor([1, 0])
+Batch 2: tensor([[-1.2000,  3.1000],
+        [-0.5000,  2.6000]]) tensor([0, 0])
+Batch 3: tensor([[ 2.7000, -1.5000]]) tensor([1])
 ```
