@@ -79,3 +79,18 @@ Batch 2: tensor([[-1.2000,  3.1000],
         [-0.5000,  2.6000]]) tensor([0, 0])
 Batch 3: tensor([[ 2.7000, -1.5000]]) tensor([1])
 ```
+
+> [!NOTE]
+> Note that in the 3rd batch contains only a single example. 
+> Having a substantially smaller batch size can disturb the convergence during training
+> To prevent this it is recommended to set `drop_last=True`, It will drop the last batch
+
+```python
+train_loader = DataLoader(
+    dataset=train_ds,
+    batch_size=2,
+    shuffle=True,
+    num_workers=0,
+    drop_last=True
+)
+```
