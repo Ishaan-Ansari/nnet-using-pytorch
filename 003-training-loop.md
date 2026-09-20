@@ -79,3 +79,33 @@ with torch.no_grad():
 print(outputs)
 ```
 
+### Computing the accuracy of the mode (a quick module)
+
+```python
+def compute_accuracy(model, dataloader):
+    model.eval()
+    correct = 0.0
+    total_examples = 0
+
+    for idx, (features, labels) in enumerate(dataloader):
+        with torch.no_grad():
+            logits = model(features)
+
+        preditions = torch.argmax(logits, dim=1)
+        compare = labels == predictions
+        correct += torch.sum(compare)
+        total_examples += len(compare)
+
+    
+    return (correct / total_examples).item()
+
+compute_accuracy(model, test_loader)
+
+
+# saving the model
+torch.save(model.state_dict(), "model.pth")
+
+# loading the model
+model = NeuralNetwork(2,2)
+model.load_state_dict(torch.load("model.pth", weights_only=True))
+```
