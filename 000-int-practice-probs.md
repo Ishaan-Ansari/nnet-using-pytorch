@@ -46,7 +46,33 @@ else:
 #### Basic Neural Netwrk code module
 ```python 
 import torch
-from torch.utils.data import DataLoaders
+from torch.utils.data import Dataset, DataLoaders
+
+## Here we need to define our number of inputs or num outputs or num of layersor optimizers to be used
+
+## Next is how we can fetch the data 
+class NnetDataset(Dataset):
+    def __init__(self, X, y):
+        """
+        Here you need to define the path(usually) how do you expect to fetch data
+        """
+        self.features = X
+        self.labels = y
+
+    def __getitem__(self, index):
+        """
+        Single instance of the data
+        """
+        one_X = self.features[index]
+        one_y = self.labels[index]
+
+        return one_X, one_y
+
+    def __len__():
+        """
+        Size of the data set (or in a way number of rows in your dataset)
+        """
+        
 
 class NeuralNetwork(torch.nn.Module):
     def __init__(self, num_inputs, num_outputs):
