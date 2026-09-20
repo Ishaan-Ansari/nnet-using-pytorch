@@ -72,15 +72,68 @@ class NnetDataset(Dataset):
         """
         Size of the data set (or in a way number of rows in your dataset)
         """
-        
+        return self.labels.shape[0]
+
+train_ds = NnetDataset(X_train, y_train)
+test_ds = NnetDataset(X_test, y_test)
+
+train_loader = DataLoader(
+    dataset=train_ds,
+    batch_size=2,
+    shuffle=True,
+    num_workers=0
+)
+
+test_loader = DataLoader(
+    dataset=test_ds,
+    batch_size=2,
+    shuffle=True,
+    num_workers=0
+)
 
 class NeuralNetwork(torch.nn.Module):
     def __init__(self, num_inputs, num_outputs):
         super().__init__()
 
         self.layers = torch.nn.Sequential(
+            torch.nn.Linear(num_inputs, 20),
+            torch.nn.ReLU(),
 
+            torch.nn.Linear(20, 30),
+            torch.nn.ReLU(),
 
+            torch.nn.Linear(30, num_outputs),
+            torch.nn.ReLU()
         )
+
+
+    def forward(self, x):
+        logits = self.layers(x)
+        return logits
+
+
+model = NeuralNetwork(2, 3)
+
+### Loss and Optimizer selection
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=0.2, momentum=0.9)
+
+## Training Loop
+num_epoch = 3
+for epoch in range(num_epoch):
+    model.train()
+    for batch, (features, labels) in enumerate(train_loader):
+        logits = model(features)
+
+        loss = criterion(logits, labels)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        ## Add some logging in order watch validation at each step
+
+model.eval()
+
 
 ```
