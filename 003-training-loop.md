@@ -21,27 +21,6 @@ class NeuralNetwork(torch.nn.Module):
     def forward(self, x):
         logits = self.layers(x)
         return logits
-    
-    
-# incase if we want to keep the weights intialization reproducable we can do this
-torch.manual_seed(123)
-model = NeuralNetwork(50, 3)
-
-# now we can also check the results of forward pass
-# note that our network expects 50-dimensional feature vectors
-x = torch.rand((1, 50))
-out = model(x)
-print(out)
-
-# count number of learnable params
-num_params = sum(
-    p.numel() for p in model.parameters() if p.requires_grad
-)
-
-print(num_params)
-print(model.layers[0].weight)
-
-# print(model)
 ```
 
 ### Code below
