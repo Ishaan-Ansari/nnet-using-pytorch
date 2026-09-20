@@ -33,3 +33,28 @@ if torch.cuda.is_available():
 else:
     print("GPU not available)
 ```
+
+### 8. Describe the steps for creating a neural network model in PyTorch.
+- Architecture design 
+- Data prep
+- Model construction
+- Loss and optimizer selection
+- Training loop 
+- Eval pipeline
+- Inference
+
+#### Basic Neural Netwrk code module
+```python 
+import torch
+from torch.utils.data import DataLoaders
+
+class NeuralNetwork(torch.nn.Module):
+    def __init__(self, num_inputs, num_outputs):
+        super().__init__()
+
+        self.layers = torch.nn.Sequential(
+
+
+        )
+
+```

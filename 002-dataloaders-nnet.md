@@ -22,7 +22,7 @@ y_test = torch.tensor([0, 1])
 ### We create custom dataset classs
 
 ```python
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 
 class ToyDataset(Dataset):
     def __init__(self, X, y):
