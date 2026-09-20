@@ -72,7 +72,7 @@ for idx, (x, y) in enumerate(train_loader):
 ```
 
 ### The result of will look something like this
-```json
+```
 Batch 1: tensor([[ 2.3000, -1.1000],
         [-0.9000,  2.9000]]) tensor([1, 0])
 Batch 2: tensor([[-1.2000,  3.1000],
