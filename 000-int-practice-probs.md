@@ -127,9 +127,9 @@ for epoch in range(num_epoch):
 
         loss = criterion(logits, labels)
 
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        optimizer.zero_grad()   # zero_grad is used to reset the gradients of all model parameters to zero
+        loss.backward()         # compute loss
+        optimizer.step()        # update weights
 
         ## Add some logging in order watch validation at each step
 
