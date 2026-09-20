@@ -64,3 +64,18 @@ Epoch: 002/003 | Batch 001/002 | Train/Val Loss: 0.13
 Epoch: 003/003 | Batch 000/002 | Train/Val Loss: 0.03
 Epoch: 003/003 | Batch 001/002 | Train/Val Loss: 0.00
 ```
+
+> [!NOTE]
+> **Preventing undesired gradient accumulation** It is important to include ```opitmizer.zero_grad()``` call in each update round to reset the gradients to zero. Otheriwise the gradient will accumulate, which may be undisired.
+
+After we trained the model, we can use it to make predictions, as shown below:
+
+```python
+model.eval()
+
+with torch.no_grad():
+    outputs = model(X_train)
+
+print(outputs)
+```
+
