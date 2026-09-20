@@ -94,3 +94,9 @@ train_loader = DataLoader(
     drop_last=True
 )
 ```
+
+### Let's discuss about ```num_workers```
+- when ```num_workers```of workers is set to 0, the data loading will be done in the main process not in separate worker process.
+- Whereas if we increase the number of workers, multiple worker processes are launched to load data in parallel
+- Setting ```num_workers=4``` usually leads to optimal performance
+
